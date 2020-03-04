@@ -6,18 +6,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { NegotiationsModule } from "./negotiations/negotiations.module";
 import { dbUrl } from "./properties";
+import { clientDir } from "./properties";
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, "..", "..", "client"),
-      
-    }),
+    ServeStaticModule.forRoot({rootPath: clientDir}),
   	NegotiationsModule,
     MongooseModule.forRoot(dbUrl, {
-     useNewUrlParser: true,
-     useUnifiedTopology: true
-  }),
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

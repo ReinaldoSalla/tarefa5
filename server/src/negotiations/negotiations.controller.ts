@@ -17,9 +17,9 @@ export class NegotiationsController {
 
 	@Post()
 	async addProduct(
-		@Body("date") negDate: Date,
-		@Body("amount") negAmount: number,
-		@Body("value") negValue: number,
+		@Body("data") negDate: Date,
+		@Body("quantidade") negAmount: number,
+		@Body("valor") negValue: number,
 		@Body("description") negDesc: string
 	) {
 		return await this.negotiationsService.postNegotiation(negDate, negAmount,	negValue, negDesc);
@@ -38,9 +38,9 @@ export class NegotiationsController {
 	@Patch(":id")
 	async updateProduct(
 		@Param("id") negId: string,
-		@Body("date") negDate: Date,
-		@Body("amount") negAmount: number,
-		@Body("value") negValue: number,
+		@Body("data") negDate: Date,
+		@Body("quantidade") negAmount: number,
+		@Body("valor") negValue: number,
 		@Body("description") negDescription: string
 	) {
 		await this.negotiationsService.updateNegotiation(negId, negDate, negAmount, negValue, negDescription)

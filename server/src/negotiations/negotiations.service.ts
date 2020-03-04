@@ -14,8 +14,8 @@ export class NegotiationsService {
     @InjectModel("Negotiation") private readonly negotiationModel: Model<Negotiation>
   ) {}
 
-  public async postNegotiation(date: Date, amount: number, value: number, description: string): Promise<Negotiation> {
-    const newNegotiation = new this.negotiationModel({date, amount, value, description});
+  public async postNegotiation(data: Date, quantidade: number, valor: number, description: string): Promise<Negotiation> {
+    const newNegotiation = new this.negotiationModel({data, quantidade, valor, description});
     console.log(`POST method for route ${route}${negotiationsRoute}`);
     return await newNegotiation.save();
   }
@@ -26,15 +26,15 @@ export class NegotiationsService {
   }
 
   public async getNegotiation(negotiationId: string): Promise<Negotiation> {
-    console.log(`POST method for route ${route}${negotiationsRoute}/${negotiationId}`);
+    console.log(`GET method for route ${route}${negotiationsRoute}/${negotiationId}`);
     return await this.findNegotiation(negotiationId);
   }
 
-  public async updateNegotiation(id: string, date: Date, amount: number, value: number, description: string): Promise<void> {
+  public async updateNegotiation(id: string, data: Date, quantidade: number, valor: number, description: string): Promise<void> {
     const updatedNegotiation = await this.findNegotiation(id);
-    if(date) updatedNegotiation.date = date;
-    if(amount) updatedNegotiation.amount = amount;
-    if(value) updatedNegotiation.value = value;
+    if(data) updatedNegotiation.data = data;
+    if(quantidade) updatedNegotiation.quantidade = quantidade;
+    if(valor) updatedNegotiation.valor = valor;
     if(description) updatedNegotiation.description = description;
     console.log(`PATCH method for route ${route}${negotiationsRoute}/${id}`);
     updatedNegotiation.save(); 
