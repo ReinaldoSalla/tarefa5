@@ -1,0 +1,23 @@
+export class DateHelper {
+    
+    constructor() {
+        
+        throw new Error('Esta classe não pode ser instanciada');
+    }
+    
+    static dataParaTexto(data) {
+        
+        return `${data.getDate()}/${data.getMonth()+1}/${data.getFullYear()}`;
+    }
+    
+    static textoParaData(texto) {
+        
+        
+        if(!/\d{2}\/\d{2}\/\d{4}/.test(texto)) 
+            //throw new Error('Deve estar no formato dd/mm/aaaa');
+            console.log(`Invalid input date = ${texto}`);
+        
+             
+        return new Date(...texto.split('/').reverse().map((item, indice) => item - indice % 2));
+    }
+}
