@@ -1,7 +1,7 @@
 /*
-This script creates 3 collections (thisWeek, lastWeek, lastLastWeek) into the database "tarefa1".
-Each collection has 3 documents that are going to be sent to the client by service.ts
-Command for running this file: npx ts-node negotiations.populatedb.ts
+This script creates 3 collections (thisWeek, lastWeek, beforeLastWeek) into the database "tarefa5".
+Each collection has 3 documents that are going to be sent to the client by negotiations.service.ts
+Command for running this file: npx ts-node populatedb.ts
 */
 
 
@@ -24,9 +24,9 @@ class DatabaseFiller {
     constructor() {
         this.configureConnection();
         this.dates = Calendar.getDates();
-        this.createThisWeeksCollection("current");
-        this.createLastWeeksCollection("last");
-        this.createPreviousLastWeeksCollection("previousLast");
+        this.createThisWeeksCollection("thisWeek");
+        this.createLastWeeksCollection("lastWeek");
+        this.createPreviousLastWeeksCollection("beforeLastWeek");
     }
 
     private configureConnection() {

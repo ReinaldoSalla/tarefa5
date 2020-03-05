@@ -6,7 +6,12 @@ import { negotiationSchema } from "./negotiation.model";
 
 @Module({
 	imports: [
-		MongooseModule.forFeature([{ name: "Negotiation", schema: negotiationSchema }])
+		//MongooseModule.forFeature([{ name: "Negotiation", schema: negotiationSchema }])
+		MongooseModule.forFeature([
+			{ name: "ThisWeek", schema: negotiationSchema }, 
+			{ name: "LastWeek", schema: negotiationSchema },
+			{ name: "BeforeLastWeek", schema: negotiationSchema}
+		])
 	],
 	controllers: [NegotiationsController],
 	providers: [NegotiationsService]

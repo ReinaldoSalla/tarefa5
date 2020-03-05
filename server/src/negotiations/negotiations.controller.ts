@@ -8,13 +8,34 @@ import {
 	Body,
 	Param
 } from "@nestjs/common";
+import { 
+  negotiationsRoute,
+  thisWeekRoute,
+  lastWeekRoute,
+  beforeLastWeekRoute
+} from "../properties";
 import { NegotiationsService } from "./negotiations.service";
-import { negotiationsRoute } from "../properties";
 
 @Controller(negotiationsRoute)
 export class NegotiationsController {
 	constructor(private readonly negotiationsService: NegotiationsService) {}
 
+	@Get(thisWeekRoute)
+	async getCurrentNegotiations() {
+		return await this.negotiationsService.getCurrentNegotiations();
+	}
+
+	@Get(lastWeekRoute)
+	async getLastNegotiations() {
+		return await this.negotiationsService.getLastNegotiations()
+	}
+
+	@Get(beforeLastWeekRoute)
+	async getPreviousLastNegotiations() {
+		return await this.negotiationsService.getBeforeLastNegotiations();
+	}
+
+	/*
 	@Post()
 	async addProduct(
 		@Body("data") negDate: Date,
@@ -51,4 +72,5 @@ export class NegotiationsController {
 		await this.negotiationsService.deleteNegotiation(negotiationId);
 		return null;
 	}
+	*/
 }

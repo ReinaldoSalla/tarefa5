@@ -5,11 +5,39 @@ import {
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Negotiation } from "./negotiation.model";
-import { routeApi as route } from "../properties";
-import { negotiationsRoute } from "../properties";
+import { 
+  routeApi,
+  negotiationsRoute,
+  thisWeekRoute,
+  lastWeekRoute,
+  beforeLastWeekRoute
+} from "../properties";
+
 
 @Injectable()
 export class NegotiationsService {
+  constructor(
+    @InjectModel("ThisWeek") private readonly currentNegotiationModel: Model<Negotiation>,
+    @InjectModel("LastWeek") private readonly lastNegotiationModel: Model<Negotiation>,
+    @InjectModel("BeforeLastWeek") private readonly BeforeLastNegotiationModel: Model<Negotiation>
+  ) {}
+
+  public async getCurrentNegotiations(): Promise<Negotiation[]> {
+    console.log(`GET method for ${routeApi}/${negotiationsRoute}/${thisWeekRoute}`);
+    return await this.currentNegotiationModel.find();
+  }
+
+  public async getLastNegotiations(): Promise<Negotiation[]> {
+    console.log(`GET method for ${routeApi}/${negotiationsRoute}/${lastWeekRoute}`);
+    return await this.lastNegotiationModel.find();
+  }
+
+  public async getBeforeLastNegotiations(): Promise<Negotiation[]> {
+    console.log(`GET method for ${routeApi}/${negotiationsRoute}/${beforeLastWeekRoute}`);
+    return await this.BeforeLastNegotiationModel.find();
+  }
+
+  /*
   constructor(
     @InjectModel("Negotiation") private readonly negotiationModel: Model<Negotiation>
   ) {}
@@ -63,4 +91,5 @@ export class NegotiationsService {
       throw new NotFoundException(`Could not find negotiation with id ${id}`);
     return negotiation;
   }
+  */
 }
