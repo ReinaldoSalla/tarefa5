@@ -50,7 +50,7 @@ System.register(['./HttpService', './ConnectionFactory', '../dao/NegociacaoDao',
                 _createClass(NegociacaoService, [{
                     key: 'obterNegociacoesDaSemana',
                     value: function obterNegociacoesDaSemana() {
-                        return this._http.get('negociacoes/semana').then(function (negociacoes) {
+                        return this._http.get('api/negotiations/thisWeek').then(function (negociacoes) {
                             console.log(negociacoes);
                             return negociacoes.map(function (objeto) {
                                 return new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor);
@@ -63,7 +63,7 @@ System.register(['./HttpService', './ConnectionFactory', '../dao/NegociacaoDao',
                 }, {
                     key: 'obterNegociacoesDaSemanaAnterior',
                     value: function obterNegociacoesDaSemanaAnterior() {
-                        return this._http.get('negociacoes/anterior').then(function (negociacoes) {
+                        return this._http.get('api/negotiations/lastWeek').then(function (negociacoes) {
                             console.log(negociacoes);
                             return negociacoes.map(function (objeto) {
                                 return new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor);
@@ -76,7 +76,7 @@ System.register(['./HttpService', './ConnectionFactory', '../dao/NegociacaoDao',
                 }, {
                     key: 'obterNegociacoesDaSemanaRetrasada',
                     value: function obterNegociacoesDaSemanaRetrasada() {
-                        return this._http.get('negociacoes/retrasada').then(function (negociacoes) {
+                        return this._http.get('api/negotiations/beforeLastWeek').then(function (negociacoes) {
                             console.log(negociacoes);
                             return negociacoes.map(function (objeto) {
                                 return new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor);
