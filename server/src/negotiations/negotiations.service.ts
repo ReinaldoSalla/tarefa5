@@ -14,7 +14,6 @@ import { Model } from "mongoose";
 import { Negotiation } from "./negotiation.model";
 import Calendar from "../utils/calendar";
 
-
 @Injectable()
 export class NegotiationsService {
   constructor(
@@ -39,76 +38,52 @@ export class NegotiationsService {
     return await this.BeforeLastNegotiationModel.find();
   }
 
-  public async getSavedNegotiations(): Promise<Negotiation[]> {
+  public async getOneSavedNegotiation(id: string): Promise<Negotiation> {
+    console.log(`GET method for route ${routeApi}/${negotiationsRoute}/${id}`);
+    return await this.fetchNegotiation(id);
+  }
+
+  public async getAllSavedNegotiations(): Promise<Negotiation[]> {
     console.log(`GET method for route ${routeApi}/${negotiationsRoute}`);
     return await this.savedNegotiationModel.find();
   }
 
-  public async postNegotiation(tmpData: string, quantidade: number, valor: number, description: string): Promise<Negotiation> {
+  public async postNegotiation(rawData: string, quantidade: number, valor: number, description: string): Promise<Negotiation> {
     console.log(`POST method for route ${routeApi}/${negotiationsRoute}`);
-    const data: Date = Calendar.convertFromBrToUs(tmpData);
+    const data: Date = Calendar.convertFromBrToUs(rawData);
     const newNegotiation = new this.savedNegotiationModel({data, quantidade, valor, description});
     return await newNegotiation.save();
   }
 
-  public async deleteNegotiations() {
+  public async updateNegotiation(id: string, rawData: string, quantidade: number, valor: number, description: string) {
+    console.log(`PATCH method for route ${routeApi}/${negotiationsRoute}`);
+    const updatedNegotiation = await this.fetchNegotiation(id);
+    if(rawData) updatedNegotiation.rawData = Calendar.convertFromBrToUs(rawData);
+    if(quantidade) updatedNegotiation.quantidade = quantidade;
+    if(valor) updatedNegotiation.valor = valor;
+    if(description) updatedNegotiation.description = description;
+    updatedNegotiation.save();
+  }
+
+  public async deleteOneNegotiation(id) {
+    console.log(`DELETE method for route ${routeApi}/${negotiationsRoute}/${id}`);
+    const deletedNegotiation = await this.fetchNegotiation(id, true);
+  }
+
+  public async deleteAllNegotiations() {
     console.log(`DELETE method for route ${routeApi}/${negotiationsRoute}`);
     return await this.savedNegotiationModel.deleteMany({});
   }
 
-  /*
-  constructor(
-    @InjectModel("Negotiation") private readonly negotiationModel: Model<Negotiation>
-  ) {}
-
-  public async postNegotiation(data: Date, quantidade: number, valor: number, description: string): Promise<Negotiation> {
-    const newNegotiation = new this.negotiationModel({data, quantidade, valor, description});
-    console.log(`POST method for route ${route}${negotiationsRoute}`);
-    return await newNegotiation.save();
-  }
-
-  public async getNegotiations(): Promise<Negotiation[]> {
-    console.log(`GET method for route ${route}${negotiationsRoute}`);
-    return await this.negotiationModel.find();
-  }
-
-  public async getNegotiation(negotiationId: string): Promise<Negotiation> {
-    console.log(`GET method for route ${route}${negotiationsRoute}/${negotiationId}`);
-    return await this.findNegotiation(negotiationId);
-  }
-
-  public async updateNegotiation(id: string, data: Date, quantidade: number, valor: number, description: string): Promise<void> {
-    const updatedNegotiation = await this.findNegotiation(id);
-    if(data) updatedNegotiation.data = data;
-    if(quantidade) updatedNegotiation.quantidade = quantidade;
-    if(valor) updatedNegotiation.valor = valor;
-    if(description) updatedNegotiation.description = description;
-    console.log(`PATCH method for route ${route}${negotiationsRoute}/${id}`);
-    updatedNegotiation.save(); 
-  }
-
-  public async deleteNegotiation(negotiationId: string): Promise<void> {
-    let result;
-    try {
-      result = await this.negotiationModel.deleteOne({_id: negotiationId});
-    } catch(err) {
-      throw new NotFoundException(`Invalid id: ${err}`);
-    }
-    if (result.n === 0)
-      throw new NotFoundException(`Could not delete product with id ${negotiationId}`);
-    console.log(`DELETE method for route ${route}${negotiationsRoute}/${negotiationId}`);
-  }
-
-  private async findNegotiation(id: string): Promise<Negotiation> {
+  private async fetchNegotiation(id, fetchAndDelete=false) {
     let negotiation;
     try {
-      negotiation = await this.negotiationModel.findById(id)
+      negotiation = fetchAndDelete ? await this.savedNegotiationModel.deleteOne({_id: id}) : await this.savedNegotiationModel.findById(id)
     } catch(err) {
-      throw new NotFoundException(`Invalid id: ${err}`);
+      throw new NotFoundException(`Id '${id}' is invalid`);
     }
-    if(!negotiation) 
-      throw new NotFoundException(`Could not find negotiation with id ${id}`);
+    if(!negotiation || negotiation.n === 0)
+      throw new NotFoundException(`Negotiation with id '${id}' does not exist in the database`);
     return negotiation;
   }
-  */
 }

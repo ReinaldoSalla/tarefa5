@@ -87,6 +87,7 @@ export class NegociacaoService {
             });
     }
 
+    
     lista() {
         return ConnectionFactory
                 .getConnection()
@@ -97,6 +98,7 @@ export class NegociacaoService {
                     throw new Error('Não foi possível obter as negociações')
                 })
     }
+    
 
     apaga() {
         return ConnectionFactory
