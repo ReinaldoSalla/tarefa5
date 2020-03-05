@@ -10,7 +10,8 @@ import { negotiationSchema } from "./negotiation.model";
 		MongooseModule.forFeature([
 			{ name: "ThisWeek", schema: negotiationSchema }, 
 			{ name: "LastWeek", schema: negotiationSchema },
-			{ name: "BeforeLastWeek", schema: negotiationSchema}
+			{ name: "BeforeLastWeek", schema: negotiationSchema},
+			{ name: "Saved", schema: negotiationSchema } 
 		])
 	],
 	controllers: [NegotiationsController],

@@ -101,6 +101,7 @@ class NegociacaoController {
                 }
             })
             .catch(err => console.error(err)); 
+        
     }
     
     apaga() {    

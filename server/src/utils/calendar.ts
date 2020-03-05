@@ -5,13 +5,22 @@ export interface Dates {
 }
 
 export default class Calendar {
-    static convertToBrStandard(date: Date): string {
+    public static convertToBrStandard(date: Date): string {
         return (`
             ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} - ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
         ).replace((/  |\r\n|\n|\r/gm),"");
     }
 
-    static getDates(): Dates {
+    public static convertFromBrToUs(date: string): Date {
+        // Client = day/month/year
+        // Server = year/month/day
+        const elements = date.split("/");
+        const [day, month, year] = elements
+        let convertedMonth = parseInt(month);
+        return new Date(parseInt(year), convertedMonth-1, parseInt(day));
+    }
+
+    public static getDates(): Dates {
         let t1 = new Date();
         let t2 = new Date();
         let t3 = new Date();

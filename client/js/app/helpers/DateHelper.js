@@ -60,11 +60,6 @@ System.register([], function (_export, _context) {
                 }, {
                     key: 'textoParaData',
                     value: function textoParaData(texto) {
-
-                        if (!/\d{2}\/\d{2}\/\d{4}/.test(texto))
-                            //throw new Error('Deve estar no formato dd/mm/aaaa');
-                            console.log('Invalid input date = ' + texto);
-
                         return new (Function.prototype.bind.apply(Date, [null].concat(_toConsumableArray(texto.split('/').reverse().map(function (item, indice) {
                             return item - indice % 2;
                         })))))();

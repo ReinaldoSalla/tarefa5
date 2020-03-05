@@ -35,6 +35,22 @@ export class NegotiationsController {
 		return await this.negotiationsService.getBeforeLastNegotiations();
 	}
 
+	@Post()
+	/*
+		The data received from the request has to be a string instead of a Date type. This is necessary because
+	the user is going to type, for example, 30/01/2020, which is not a valid TypeScript Date type.
+	However, the data entered by the user is converted from string to date in the provider, hence the
+	date is saved as a proper Date type in the MongoDB.
+	*/
+	async postNegotiation(
+		@Body("data") negDate: string,
+		@Body("quantidade") negAmount: number,
+		@Body("valor") negValue: number,
+		@Body("description") negDesc: string
+	) {
+		return await this.negotiationsService.postNegotiation(negDate, negAmount, negValue, negDesc)
+	}
+
 	/*
 	@Post()
 	async addProduct(

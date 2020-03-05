@@ -2,9 +2,6 @@ import {
   Injectable,
   NotFoundException
 } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
-import { Negotiation } from "./negotiation.model";
 import { 
   routeApi,
   negotiationsRoute,
@@ -12,6 +9,10 @@ import {
   lastWeekRoute,
   beforeLastWeekRoute
 } from "../properties";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { Negotiation } from "./negotiation.model";
+import Calendar from "../utils/calendar";
 
 
 @Injectable()
@@ -19,22 +20,31 @@ export class NegotiationsService {
   constructor(
     @InjectModel("ThisWeek") private readonly currentNegotiationModel: Model<Negotiation>,
     @InjectModel("LastWeek") private readonly lastNegotiationModel: Model<Negotiation>,
-    @InjectModel("BeforeLastWeek") private readonly BeforeLastNegotiationModel: Model<Negotiation>
+    @InjectModel("BeforeLastWeek") private readonly BeforeLastNegotiationModel: Model<Negotiation>,
+    @InjectModel("Saved") private readonly savedNegotiationModel: Model<Negotiation>
   ) {}
 
   public async getCurrentNegotiations(): Promise<Negotiation[]> {
-    console.log(`GET method for ${routeApi}/${negotiationsRoute}/${thisWeekRoute}`);
+    console.log(`GET method for route ${routeApi}/${negotiationsRoute}/${thisWeekRoute}`);
     return await this.currentNegotiationModel.find();
   }
 
   public async getLastNegotiations(): Promise<Negotiation[]> {
-    console.log(`GET method for ${routeApi}/${negotiationsRoute}/${lastWeekRoute}`);
+    console.log(`GET method for route ${routeApi}/${negotiationsRoute}/${lastWeekRoute}`);
     return await this.lastNegotiationModel.find();
   }
 
   public async getBeforeLastNegotiations(): Promise<Negotiation[]> {
-    console.log(`GET method for ${routeApi}/${negotiationsRoute}/${beforeLastWeekRoute}`);
+    console.log(`GET method for route ${routeApi}/${negotiationsRoute}/${beforeLastWeekRoute}`);
     return await this.BeforeLastNegotiationModel.find();
+  }
+
+  public async postNegotiation(tmpData: string, quantidade: number, valor: number, description: string): Promise<Negotiation> {
+    console.log(`POST method for route ${routeApi}/${negotiationsRoute}`);
+    const data: Date = Calendar.convertFromBrToUs(tmpData);
+    console.log(data);
+    const newNegotiation = new this.savedNegotiationModel({data, quantidade, valor, description});
+    return await newNegotiation.save();
   }
 
   /*

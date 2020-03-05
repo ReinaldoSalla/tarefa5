@@ -41,29 +41,17 @@ System.register(["./HttpService"], function (_export, _context) {
                     this.inputData = inputData;
                     this.inputQuantidade = inputQuantidade;
                     this.inputValor = inputValor;
-                    this.usDate = this.convertDate();
                     this.negociacao = {
-                        data: this.usDate,
+                        data: this.inputData.value,
                         quantidade: this.inputQuantidade.value,
                         valor: this.inputValor.value
                     };
                 }
 
                 _createClass(PostService, [{
-                    key: "convertDate",
-                    value: function convertDate() {
-                        // Client = day/month/year = 0/1/2
-                        // Server = year/month/date = 2/1/0
-                        var elements = this.inputData.value.split("/");
-                        elements[1] = parseInt(elements[1] - 1);
-                        return new Date(elements[2], elements[1], elements[0]);
-                    }
-                }, {
                     key: "sendData",
                     value: function sendData() {
-                        var negociacao = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.negociacao;
-
-                        return new HttpService().post('/negociacoes', negociacao);
+                        return new HttpService().post('api/negotiations/', this.negociacao);
                     }
                 }]);
 
