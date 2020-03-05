@@ -51,6 +51,11 @@ export class NegotiationsService {
     return await newNegotiation.save();
   }
 
+  public async deleteNegotiations() {
+    console.log(`DELETE method for route ${routeApi}/${negotiationsRoute}`);
+    return await this.savedNegotiationModel.deleteMany({});
+  }
+
   /*
   constructor(
     @InjectModel("Negotiation") private readonly negotiationModel: Model<Negotiation>

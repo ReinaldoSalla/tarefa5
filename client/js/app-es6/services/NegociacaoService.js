@@ -136,6 +136,6 @@ export class NegociacaoService {
     }
 
     deletaSalvas() {
-        new HttpService().delete('/negociacoes')
+        new HttpService().delete('api/negotiations/')
     }
 }

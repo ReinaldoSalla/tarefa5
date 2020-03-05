@@ -56,6 +56,12 @@ export class NegotiationsController {
 		return await this.negotiationsService.postNegotiation(negDate, negAmount, negValue, negDesc)
 	}
 
+	@Delete()
+	async deleteNegotiations() {
+		await	this.negotiationsService.deleteNegotiations();
+		return null
+	}
+
 	/*
 	@Post()
 	async addProduct(
