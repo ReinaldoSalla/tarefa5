@@ -94,6 +94,7 @@ System.register(['../models/ListaNegociacoes', '../models/Mensagem', '../views/N
                     value: function importaNegociacoesSalvas() {
                         var _this2 = this;
 
+                        console.log("x");
                         this._service.importaSalvas(this._listaNegociacoes.negociacoes).then(function (negociacoes) {
                             return negociacoes.forEach(function (negociacao) {
                                 _this2._listaNegociacoes.adiciona(negociacao);

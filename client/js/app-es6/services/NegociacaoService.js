@@ -49,14 +49,14 @@ export class NegociacaoService {
 
     obterNegociacoesSalvas() {
         return this._http
-            .get('negociacoes/salvas')
+            .get('api/negotiations/')
             .then(negociacoes => {
                 console.log(negociacoes);
                 return negociacoes.map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor));
             })
             .catch(erro => {
                 console.log(erro);
-                throw new Error('Não foi possível obter as negociações da semana retrasada');
+                throw new Error('Não foi possível obter as negociações salvas');
             });  
     }
     

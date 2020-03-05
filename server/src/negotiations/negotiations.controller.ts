@@ -35,6 +35,11 @@ export class NegotiationsController {
 		return await this.negotiationsService.getBeforeLastNegotiations();
 	}
 
+	@Get() 
+	async getSavedNegotiations() {
+		return await this.negotiationsService.getSavedNegotiations();
+	}
+
 	@Post()
 	/*
 		The data received from the request has to be a string instead of a Date type. This is necessary because

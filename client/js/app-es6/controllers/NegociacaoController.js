@@ -41,6 +41,7 @@ class NegociacaoController {
     }
 
     importaNegociacoesSalvas() {
+        console.log("x");
         this._service
             .importaSalvas(this._listaNegociacoes.negociacoes)
             .then(negociacoes => negociacoes.forEach(negociacao => {

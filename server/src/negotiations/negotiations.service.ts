@@ -39,10 +39,14 @@ export class NegotiationsService {
     return await this.BeforeLastNegotiationModel.find();
   }
 
+  public async getSavedNegotiations(): Promise<Negotiation[]> {
+    console.log(`GET method for route ${routeApi}/${negotiationsRoute}`);
+    return await this.savedNegotiationModel.find();
+  }
+
   public async postNegotiation(tmpData: string, quantidade: number, valor: number, description: string): Promise<Negotiation> {
     console.log(`POST method for route ${routeApi}/${negotiationsRoute}`);
     const data: Date = Calendar.convertFromBrToUs(tmpData);
-    console.log(data);
     const newNegotiation = new this.savedNegotiationModel({data, quantidade, valor, description});
     return await newNegotiation.save();
   }

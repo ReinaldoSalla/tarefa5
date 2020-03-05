@@ -89,14 +89,14 @@ System.register(['./HttpService', './ConnectionFactory', '../dao/NegociacaoDao',
                 }, {
                     key: 'obterNegociacoesSalvas',
                     value: function obterNegociacoesSalvas() {
-                        return this._http.get('negociacoes/salvas').then(function (negociacoes) {
+                        return this._http.get('api/negotiations/').then(function (negociacoes) {
                             console.log(negociacoes);
                             return negociacoes.map(function (objeto) {
                                 return new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor);
                             });
                         }).catch(function (erro) {
                             console.log(erro);
-                            throw new Error('Não foi possível obter as negociações da semana retrasada');
+                            throw new Error('Não foi possível obter as negociações salvas');
                         });
                     }
                 }, {
