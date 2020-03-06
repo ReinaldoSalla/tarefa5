@@ -5,6 +5,8 @@ import { route } from "./properties";
 import { clientDir } from "./properties";
 import { dbUrl } from "./properties";
 
+import {join} from "path";
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');

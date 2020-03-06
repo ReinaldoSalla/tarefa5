@@ -14,3 +14,5 @@ export const negotiationsRoute: string = "negotiations";
 export const thisWeekRoute: string = "thisWeek";
 export const lastWeekRoute: string = "lastWeek";
 export const beforeLastWeekRoute: string = "beforeLastWeek"
+
+export const negotiationsLogsDir: string = join(__dirname, "..", "src", "negotiations", "negotiations.logs");
