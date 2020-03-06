@@ -25,7 +25,6 @@ class NegociacaoController {
         this._service = new NegociacaoService();
         this.importaNegociacoesSalvas();
         //_this.automaticallyImport();
-
     }
     
     _automaticallyImport() {

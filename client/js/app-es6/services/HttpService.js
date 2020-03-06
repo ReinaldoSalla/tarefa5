@@ -13,7 +13,7 @@ export class HttpService {
     
     post(url, dado) {
         return fetch(url, {
-            headers: { 'Content-type' : 'application/json'},
+            headers: {'Content-type' : 'application/json'},
             method: 'post',
             body: JSON.stringify(dado)
         })

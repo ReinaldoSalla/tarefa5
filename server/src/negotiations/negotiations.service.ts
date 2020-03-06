@@ -18,10 +18,10 @@ import { negotiationLogger } from "../logger";
 @Injectable()
 export class NegotiationsService {
   constructor(
-    @InjectModel("ThisWeek") private readonly currentNegotiationModel: Model<Negotiation>,
-    @InjectModel("LastWeek") private readonly lastNegotiationModel: Model<Negotiation>,
-    @InjectModel("BeforeLastWeek") private readonly BeforeLastNegotiationModel: Model<Negotiation>,
-    @InjectModel("Saved") private readonly savedNegotiationModel: Model<Negotiation>
+    @InjectModel("ThisWeek") public readonly currentNegotiationModel: Model<Negotiation>,
+    @InjectModel("LastWeek") public readonly lastNegotiationModel: Model<Negotiation>,
+    @InjectModel("BeforeLastWeek") public readonly BeforeLastNegotiationModel: Model<Negotiation>,
+    @InjectModel("Saved") public readonly savedNegotiationModel: Model<Negotiation>
   ) {}
 
   public async getCurrentNegotiations(): Promise<Negotiation[]> {
@@ -54,35 +54,35 @@ export class NegotiationsService {
     return await this.savedNegotiationModel.find();
   }
 
-  public async postNegotiation(rawDate: string, quantidade: number, valor: number, description: string): Promise<Negotiation> {
+  public async postNegotiation(rawDate: string, quantidade: number, valor: number): Promise<Negotiation> {
     const msg: string = `POST method for route ${routeApi}/${negotiationsRoute}`
     console.log(msg); negotiationLogger.info(msg); 
     const data: Date = Calendar.convertFromBrToUs(rawDate);
-    const newNegotiation = new this.savedNegotiationModel({data, quantidade, valor, description});
+    const newNegotiation = new this.savedNegotiationModel({data, quantidade, valor});
     return await newNegotiation.save();
   }
 
-  public async updateNegotiation(id: string, rawDate: string, quantidade: number, valor: number, description: string) {
-    const msg: string = `PATCH method for route ${routeApi}/${negotiationsRoute}`;
+
+  public async patchNegotiation(id: string, rawDate: string, quantidade: number, valor: number): Promise<void> {
+    const msg: string = `PATCH method for route ${routeApi}/${negotiationsRoute}/${id}`;
     console.log(msg); negotiationLogger.info(msg); 
     const updatedNegotiation = await this.fetchNegotiation(id);
     if(rawDate) updatedNegotiation.data = Calendar.convertFromBrToUs(rawDate);
     if(quantidade) updatedNegotiation.quantidade = quantidade;
     if(valor) updatedNegotiation.valor = valor;
-    if(description) updatedNegotiation.description = description;
     updatedNegotiation.save();
   }
 
-  public async deleteOneNegotiation(id) {
+  public async deleteOneNegotiation(id): Promise<void> {
     const msg: string = `DELETE method for route ${routeApi}/${negotiationsRoute}/${id}`;
     console.log(msg); negotiationLogger.info(msg); 
     const deletedNegotiation = await this.fetchNegotiation(id, true);
   }
 
-  public async deleteAllNegotiations() {
+  public async deleteAllNegotiations(): Promise<void> {
     const msg: string = `DELETE method for route ${routeApi}/${negotiationsRoute}`;
     console.log(msg); negotiationLogger.info(msg); 
-    return await this.savedNegotiationModel.deleteMany({});
+    await this.savedNegotiationModel.deleteMany({});
   }
 
   private async fetchNegotiation(id, fetchAndDelete=false) {

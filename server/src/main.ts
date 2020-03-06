@@ -1,15 +1,18 @@
 import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from "@nestjs/common";
 import { AppModule } from './app.module';
 import { port } from "./properties";
 import { route } from "./properties";
 import { clientDir } from "./properties";
 import { dbUrl } from "./properties";
 
-import {join} from "path";
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
+  app.useGlobalPipes(new ValidationPipe({
+  	skipMissingProperties: true
+  }));
+  app.enableCors();
   await app.listen(port);
   console.log(`Server running. URL: http://${route}`);
   console.log(`MongoDB connected. URL: ${dbUrl}`);
