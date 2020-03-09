@@ -46,9 +46,16 @@ System.register(["./HttpService"], function (_export, _context) {
                         quantidade: this.inputQuantidade.value,
                         valor: this.inputValor.value
                     };
+                    this.convertToInteger();
                 }
 
                 _createClass(PostService, [{
+                    key: "convertToInteger",
+                    value: function convertToInteger() {
+                        this.negociacao.quantidade = parseInt(this.negociacao.quantidade);
+                        this.negociacao.valor = parseInt(this.negociacao.valor);
+                    }
+                }, {
                     key: "sendData",
                     value: function sendData() {
                         return new HttpService().post('api/negotiations/', this.negociacao);

@@ -6,11 +6,9 @@ Command for running this file: npx ts-node populatedb.ts
 
 
 import * as mongoose from "mongoose";
-import { negotiationSchema } from "../negotiations/negotiation.model";
+import { negotiationSchema } from "../negotiations/negotiation.schema";
 import Calendar, { Dates }  from "../utils/calendar";
 import { dbUrl } from "../properties";
-
-//mongoose, Model, Document
 
 interface Negotiations {
     data: Date, 

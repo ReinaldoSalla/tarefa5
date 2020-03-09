@@ -11,9 +11,10 @@ import {
 } from "../properties";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { Negotiation } from "./negotiation.model";
+import { Negotiation } from "./negotiation.interface";
 import Calendar from "../utils/calendar";
 import { negotiationLogger } from "../logger";
+import { NegotiationDto } from "./negotiation.dto"
 
 @Injectable()
 export class NegotiationsService {
@@ -54,14 +55,12 @@ export class NegotiationsService {
     return await this.savedNegotiationModel.find();
   }
 
-  public async postNegotiation(rawDate: string, quantidade: number, valor: number): Promise<Negotiation> {
+  public async postNegotiation(data: Date, quantidade: number, valor: number): Promise<Negotiation> {
     const msg: string = `POST method for route ${routeApi}/${negotiationsRoute}`
     console.log(msg); negotiationLogger.info(msg); 
-    const data: Date = Calendar.convertFromBrToUs(rawDate);
     const newNegotiation = new this.savedNegotiationModel({data, quantidade, valor});
     return await newNegotiation.save();
   }
-
 
   public async patchNegotiation(id: string, rawDate: string, quantidade: number, valor: number): Promise<void> {
     const msg: string = `PATCH method for route ${routeApi}/${negotiationsRoute}/${id}`;

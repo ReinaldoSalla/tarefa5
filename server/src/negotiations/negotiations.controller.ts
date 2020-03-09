@@ -6,8 +6,7 @@ import {
 	Patch,
 	Delete,
 	Body,
-	Param,
-	UsePipes
+	Param
 } from "@nestjs/common";
 import { 
   negotiationsRoute,
@@ -16,9 +15,11 @@ import {
   beforeLastWeekRoute
 } from "../properties";
 import  { ValidationPipe } from "@nestjs/common";
-import { Negotiation } from "./negotiation.model";
+import { Negotiation } from "./negotiation.interface";
 import { NegotiationsService } from "./negotiations.service";
-import { Validator } from "class-validator";
+import { NegotiationDto } from "./negotiation.dto";
+import { validateDate } from "./negotiation.custom.pipe";
+import Calendar from "../utils/calendar"
 
 @Controller(negotiationsRoute)
 export class NegotiationsController {
@@ -49,19 +50,16 @@ export class NegotiationsController {
 		return await this.negotiationsService.getAllSavedNegotiations();
 	}
 
-	/*
-	The data received from the request has to be a string instead of a Date type. This is necessary because
-	the user is going to type, for example, 30/01/2020, which is not a valid TypeScript Date type.
-	However, the data is converted from string to date in the provider, hence the
-	date is saved as a proper Date type in the MongoDB.
-	*/
 	@Post()
 	async postNegotiation(
+		@Body() negotiationDto: NegotiationDto,
 		@Body("data") date: string,
 		@Body("quantidade") amount: number,
 		@Body("valor") value: number,
-	) {
-		return await this.negotiationsService.postNegotiation(date, amount, value);
+	): Promise<Negotiation> {
+		Calendar.validateBrDate(date);
+		const convertedDate: Date = Calendar.convertFromBrToUs(date);
+		return await this.negotiationsService.postNegotiation(convertedDate, amount, value);
 	}
 
 	@Patch(":id")

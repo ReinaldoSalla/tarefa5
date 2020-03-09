@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { NegotiationsController } from "./negotiations.controller";
 import { NegotiationsService } from "./negotiations.service";
-import { negotiationSchema } from "./negotiation.model";
+import { negotiationSchema } from "./negotiation.schema";
 
 @Module({
 	imports: [

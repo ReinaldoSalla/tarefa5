@@ -10,8 +10,13 @@ export class PostService {
             quantidade: this.inputQuantidade.value,
             valor: this.inputValor.value
         }
+        this.convertToInteger()
     }
 
+    convertToInteger() {
+        this.negociacao.quantidade = parseInt(this.negociacao.quantidade);
+        this.negociacao.valor = parseInt(this.negociacao.valor);
+    }
 
     sendData() {
         return new HttpService().post('api/negotiations/', this.negociacao)

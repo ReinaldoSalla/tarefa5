@@ -9,9 +9,7 @@ import { dbUrl } from "./properties";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
-  app.useGlobalPipes(new ValidationPipe({
-  	skipMissingProperties: true
-  }));
+  app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
   await app.listen(port);
   console.log(`Server running. URL: http://${route}`);
