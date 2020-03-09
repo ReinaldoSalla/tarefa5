@@ -1,5 +1,5 @@
 import {currentInstance} from './controllers/NegociacaoController';
-import {} from './polyfill/fetch';
+//import {} from './polyfill/fetch';
 
 let negociacaoController = currentInstance();
 

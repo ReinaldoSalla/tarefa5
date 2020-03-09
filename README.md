@@ -1,4 +1,7 @@
-done \
+cd server && npm run start:dev
+
+cd client && npm run watch
+
 STATIC CONTENT: localhost:3000 \
 MESSAGE: localhost:3000/api \
 POST: localhost:3000/api/negotiations  \
@@ -10,9 +13,5 @@ GET: localhost/3000/api/negotiations/beforeLastWeek  \
 PATCH: localhost:3000/api/negotiations/id \
 DELETE: localhost:3000/api/negotiations \
 DELETE: localhost:3000/api/negotiations/id \
-LOGS
-
-
-todo \
-amount and value validations \
-date validations
+LOGS all methods
+VALIDATIONS date, amount, value
