@@ -282,3 +282,14 @@
 {"message":"DELETE method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:29:27 - 9/3/2020"}
 {"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:29:27 - 9/3/2020"}
 {"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:29:27 - 9/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:39:32 - 9/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:39:32 - 9/3/2020"}
+{"message":"PATCH method for route localhost/3000/api/negotiations/5e6652e586d6b22194ad955f","level":"info","service":"test-service","datetime":"11:39:32 - 9/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:39:32 - 9/3/2020"}
+{"message":"PATCH method for route localhost/3000/api/negotiations/5e6652e586d6b22194ad955f","level":"info","service":"test-service","datetime":"11:41:18 - 9/3/2020"}
+{"message":"PATCH method for route localhost/3000/api/negotiations/5e6652e586d6b22194ad955f","level":"info","service":"test-service","datetime":"11:41:18 - 9/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:41:18 - 9/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:41:18 - 9/3/2020"}
+{"message":"PATCH method for route localhost/3000/api/negotiations/5e6652e586d6b22194ad955f","level":"info","service":"test-service","datetime":"11:41:18 - 9/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:41:18 - 9/3/2020"}
+{"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:41:18 - 9/3/2020"}

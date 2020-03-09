@@ -62,11 +62,11 @@ export class NegotiationsService {
     return await newNegotiation.save();
   }
 
-  public async patchNegotiation(id: string, rawDate: string, quantidade: number, valor: number): Promise<void> {
+  public async patchNegotiation(id: string, data: Date, quantidade: number, valor: number): Promise<void> {
     const msg: string = `PATCH method for route ${routeApi}/${negotiationsRoute}/${id}`;
     console.log(msg); negotiationLogger.info(msg); 
     const updatedNegotiation = await this.fetchNegotiation(id);
-    if(rawDate) updatedNegotiation.data = Calendar.convertFromBrToUs(rawDate);
+    if(data) updatedNegotiation.data = data;
     if(quantidade) updatedNegotiation.quantidade = quantidade;
     if(valor) updatedNegotiation.valor = valor;
     updatedNegotiation.save();

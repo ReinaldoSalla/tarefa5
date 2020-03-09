@@ -18,7 +18,6 @@ import  { ValidationPipe } from "@nestjs/common";
 import { Negotiation } from "./negotiation.interface";
 import { NegotiationsService } from "./negotiations.service";
 import { NegotiationDto } from "./negotiation.dto";
-import { validateDate } from "./negotiation.custom.pipe";
 import Calendar from "../utils/calendar"
 
 @Controller(negotiationsRoute)
@@ -64,12 +63,15 @@ export class NegotiationsController {
 
 	@Patch(":id")
 	async patchNegotiation(
-		@Param("id") negId: string,
-		@Body("data") negDate: string,
-		@Body("quantidade") negAmount: number,
-		@Body("valor") negValue: number,
+		@Body() negotiationDto: NegotiationDto,
+		@Param("id") id: string,
+		@Body("data") date: string,
+		@Body("quantidade") amount: number,
+		@Body("valor") value: number,
 	): Promise<null> {
-		await this.negotiationsService.patchNegotiation(negId, negDate, negAmount, negValue);
+		Calendar.validateBrDate(date);
+		const convertedDate: Date = Calendar.convertFromBrToUs(date);
+		await this.negotiationsService.patchNegotiation(id, convertedDate, amount, value);
 		return null;
 	}
 
