@@ -14,7 +14,7 @@ import { Model } from "mongoose";
 import { Negotiation } from "./negotiation.interface";
 import Calendar from "../utils/calendar";
 import { negotiationLogger } from "../logger";
-import { NegotiationDto } from "./negotiation.dto"
+import { NegotiationDto } from "./negotiation.dto";
 
 @Injectable()
 export class NegotiationsService {
@@ -44,9 +44,13 @@ export class NegotiationsService {
   }
 
   public async getOneSavedNegotiation(id: string): Promise<Negotiation> {
-    const msg: string = `GET method for route ${routeApi}/${negotiationsRoute}/${id}`;
-    console.log(msg); negotiationLogger.info(msg); 
-    return await this.fetchNegotiation(id);
+    const negotiation = await this.savedNegotiationModel.findById(id)
+    if(negotiation) {
+      const msg: string = `GET method for route ${routeApi}/${negotiationsRoute}/${id}`;
+      negotiationLogger.info(msg); console.log(msg);
+      return negotiation
+    }
+    else throw new NotFoundException(`Negotiation with id '${id}' does not exist in the database`);
   }
 
   public async getAllSavedNegotiations(): Promise<Negotiation[]> {
@@ -63,36 +67,28 @@ export class NegotiationsService {
   }
 
   public async patchNegotiation(id: string, data: Date, quantidade: number, valor: number): Promise<void> {
-    const msg: string = `PATCH method for route ${routeApi}/${negotiationsRoute}/${id}`;
-    console.log(msg); negotiationLogger.info(msg); 
-    const updatedNegotiation = await this.fetchNegotiation(id);
-    if(data) updatedNegotiation.data = data;
-    if(quantidade) updatedNegotiation.quantidade = quantidade;
-    if(valor) updatedNegotiation.valor = valor;
-    updatedNegotiation.save();
+    const negotiation = await this.savedNegotiationModel.findById(id)
+    if(negotiation) {
+      if(data) negotiation.data = data;
+      if(quantidade) negotiation.quantidade = quantidade;
+      if(valor) negotiation.valor = valor;
+      const msg: string = `PATCH method for route ${routeApi}/${negotiationsRoute}/${id}`;
+      console.log(msg); negotiationLogger.info(msg); 
+      negotiation.save();
+    } else throw new NotFoundException(`Negotiation with id '${id}' does not exist in the database`);
   }
 
   public async deleteOneNegotiation(id): Promise<void> {
-    const msg: string = `DELETE method for route ${routeApi}/${negotiationsRoute}/${id}`;
-    console.log(msg); negotiationLogger.info(msg); 
-    const deletedNegotiation = await this.fetchNegotiation(id, true);
+    const negotiation = await this.savedNegotiationModel.deleteOne({_id: id});
+    if(negotiation.n !== 0) {
+      const msg: string = `DELETE method for route ${routeApi}/${negotiationsRoute}/${id}`;
+      console.log(msg); negotiationLogger.info(msg); 
+    } else throw new NotFoundException(`Negotiation with id '${id}' does not exist in the database`);
   }
 
   public async deleteAllNegotiations(): Promise<void> {
     const msg: string = `DELETE method for route ${routeApi}/${negotiationsRoute}`;
     console.log(msg); negotiationLogger.info(msg); 
     await this.savedNegotiationModel.deleteMany({});
-  }
-
-  private async fetchNegotiation(id, fetchAndDelete=false) {
-    let negotiation;
-    try {
-      negotiation = fetchAndDelete ? await this.savedNegotiationModel.deleteOne({_id: id}) : await this.savedNegotiationModel.findById(id)
-    } catch(err) {
-      throw new NotFoundException(`Id '${id}' is invalid`);
-    }
-    if(!negotiation || negotiation.n === 0)
-      throw new NotFoundException(`Negotiation with id '${id}' does not exist in the database`);
-    return negotiation;
   }
 }

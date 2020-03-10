@@ -184,7 +184,7 @@ System.register(['./HttpService', './ConnectionFactory', '../dao/NegociacaoDao',
                 }, {
                     key: 'deletaSalvas',
                     value: function deletaSalvas() {
-                        new HttpService().delete('api/negotiations/');
+                        this._http.delete('api/negotiations/');
                     }
                 }]);
 
