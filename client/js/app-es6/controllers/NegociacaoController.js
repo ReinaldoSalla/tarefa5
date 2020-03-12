@@ -80,7 +80,6 @@ class NegociacaoController {
 
     // MongoDB
     sendPost(event) {
-        /* Validations are made in the server, not in the client side */
         event.preventDefault();
         let negociacao = this._criaNegociacao();
         const postService = new PostService(
@@ -89,18 +88,33 @@ class NegociacaoController {
             this._inputValor
         )
         postService.sendData()
-            .then(response => {
-                if(response.status === 201) {
+            .then(res => {
+                if(res.status === 201) {
                     this._mensagem.texto = "Negociação cadastrada com sucesso";
                     this._limpaFormulario();   
                     this._listaNegociacoes.adiciona(negociacao);
                 } else {
-                    this._mensagem.texto = "Não foi possível cadastrar a negociação";
-                    this._limpaFormulario();   
+                    res.json()
+                        .then(data => {
+                            this._mensagem.texto = "Não foi possível cadastrar a negociação";
+                            console.log(typeof data.message);
+                            if(typeof data.message !== "string") {
+                                data.message.forEach(err => {
+                                    console.log(err.property);
+                                    if (err.property === "quantidade") {
+                                        console.log("error in quantidade");
+                                    } else if (err.property === "valor") {
+                                        console.log("error in valor");
+                                    }
+                                })
+                            }
+                            else {
+                                console.log(data.message);
+                            }
+                        })
                 }
             })
-            .catch(err => console.error(err)); 
-        
+            .catch(err => console.log(err));
     }
     
     apaga() {    
@@ -142,7 +156,5 @@ class NegociacaoController {
 let negociacaoController = new NegociacaoController();
 
 export function currentInstance() {
-
     return negociacaoController;
-
 }

@@ -38,17 +38,13 @@ GET(id), PATCH(id), DELETE(id): id
 
 ## Todo: 
 
-16/2/1995 frontend
-
 send error msgs to the browser, like it sends to postman
 
 do something when some client sends anendpoint that does't exist
 
-use only negotiationDto in the request body 
+create logs for errors
 
-create a custom decorator to validate the date
-
-validate the mongodb ids from the requests with a decorator validator
+16/2/1995 frontend
 
 ## Todo2:
 
