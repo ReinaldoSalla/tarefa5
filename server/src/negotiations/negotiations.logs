@@ -594,3 +594,17 @@
 {"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:57:29 - 12/3/2020"}
 {"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:57:29 - 12/3/2020"}
 {"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:57:29 - 12/3/2020"}
+{"message":"DELETE method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations/thisWeek","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations/lastWeek","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations/beforeLastWeek","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
+{"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:32:8 - 12/3/2020"}
