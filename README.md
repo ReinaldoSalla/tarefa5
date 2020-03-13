@@ -38,11 +38,9 @@ GET(id), PATCH(id), DELETE(id): id
 
 ## Todo: 
 
-send error msgs to the browser, like it sends to postman
+create logs for errors
 
 do something when some client sends anendpoint that does't exist
-
-create logs for errors
 
 16/2/1995 frontend
 
@@ -55,6 +53,3 @@ docker
 swagger
 
 authentication and autorization
-
-
-xxxx
