@@ -2,5 +2,6 @@
 dist/
 node_modules/
 package-lock.json
-mapping-tarefa5.txt
+*.logs
+*.maps
 
