@@ -89,14 +89,14 @@ class NegociacaoController {
         )
         postService.sendData()
             .then(res => {
-                if(res.status === 201) {
+                if (res.status === 201) {
                     this._mensagem.texto = "Negotiation registered with success";
                     this._limpaFormulario();   
                     this._listaNegociacoes.adiciona(negociacao);
                 } else {
                     res.json()
                         .then(data => {
-                            if(typeof data.message !== "string") {
+                            if (Array.isArray(data.message)) {
                                 data.message.forEach(err => {
                                     // Rendering the raw messages from the backend
                                     /*

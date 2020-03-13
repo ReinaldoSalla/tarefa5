@@ -642,3 +642,7 @@
 {"message":"DELETE method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"8:37:46 - 13/3/2020"}
 {"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"8:37:46 - 13/3/2020"}
 {"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"8:37:46 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"8:45:44 - 13/3/2020"}
+{"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"8:45:44 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"8:45:44 - 13/3/2020"}
+{"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"8:45:44 - 13/3/2020"}

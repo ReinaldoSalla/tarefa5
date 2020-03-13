@@ -131,7 +131,7 @@ System.register(['../models/ListaNegociacoes', '../models/Mensagem', '../views/N
                                 _this4._listaNegociacoes.adiciona(negociacao);
                             } else {
                                 res.json().then(function (data) {
-                                    if (typeof data.message !== "string") {
+                                    if (Array.isArray(data.message)) {
                                         data.message.forEach(function (err) {
                                             // Rendering the raw messages from the backend
                                             /*
