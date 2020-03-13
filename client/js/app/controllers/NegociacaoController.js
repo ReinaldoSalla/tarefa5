@@ -12,7 +12,6 @@ System.register(['../models/ListaNegociacoes', '../models/Mensagem', '../views/N
     }
 
     function currentInstance() {
-
         return negociacaoController;
     }
 
@@ -122,21 +121,36 @@ System.register(['../models/ListaNegociacoes', '../models/Mensagem', '../views/N
                     value: function sendPost(event) {
                         var _this4 = this;
 
-                        /* Validations are made in the server, not in the client side */
                         event.preventDefault();
                         var negociacao = this._criaNegociacao();
                         var postService = new PostService(this._inputData, this._inputQuantidade, this._inputValor);
-                        postService.sendData().then(function (response) {
-                            if (response.status === 201) {
-                                _this4._mensagem.texto = "Negociação cadastrada com sucesso";
+                        postService.sendData().then(function (res) {
+                            if (res.status === 201) {
+                                _this4._mensagem.texto = "Negotiation registered with success";
                                 _this4._limpaFormulario();
                                 _this4._listaNegociacoes.adiciona(negociacao);
                             } else {
-                                _this4._mensagem.texto = "Não foi possível cadastrar a negociação";
-                                _this4._limpaFormulario();
+                                res.json().then(function (data) {
+                                    if (Array.isArray(data.message)) {
+                                        data.message.forEach(function (err) {
+                                            // Rendering the raw messages from the backend
+                                            /*
+                                            Object.entries(err.constraints).forEach(([key, val]) => {
+                                                this._mensagem.texto = val;
+                                            })
+                                            */
+                                            // Rendering customized messages
+                                            var msg = "must be between 1 and 100";
+                                            if (err.property === "quantidade") _this4._mensagem.texto = 'Quantidade ' + msg;else if (err.property === "valor") _this4._mensagem.texto = 'Valor ' + msg;else _this4.mensagem.texto = "Unexpected error";
+                                        });
+                                    } else {
+                                        _this4._mensagem.texto = data.message;
+                                    }
+                                });
                             }
                         }).catch(function (err) {
-                            return console.error(err);
+                            _this4._mensagem.texto = "Unexpected Error";
+                            console.error(err);
                         });
                     }
                 }, {
