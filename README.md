@@ -1,6 +1,6 @@
 ## Usage: 
 
-`cd server && npm run start` 
+`cd server && npm run start:dev` 
 
 `cd client && npm run watch` 
 
