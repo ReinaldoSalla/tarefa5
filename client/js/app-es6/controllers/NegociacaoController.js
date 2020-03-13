@@ -90,31 +90,40 @@ class NegociacaoController {
         postService.sendData()
             .then(res => {
                 if(res.status === 201) {
-                    this._mensagem.texto = "Negociação cadastrada com sucesso";
+                    this._mensagem.texto = "Negotiation registered with success";
                     this._limpaFormulario();   
                     this._listaNegociacoes.adiciona(negociacao);
                 } else {
                     res.json()
                         .then(data => {
-                            this._mensagem.texto = "Não foi possível cadastrar a negociação";
-                            console.log(typeof data.message);
                             if(typeof data.message !== "string") {
                                 data.message.forEach(err => {
-                                    console.log(err.property);
-                                    if (err.property === "quantidade") {
-                                        console.log("error in quantidade");
-                                    } else if (err.property === "valor") {
-                                        console.log("error in valor");
-                                    }
+                                    // Rendering the raw messages from the backend
+                                    /*
+                                    Object.entries(err.constraints).forEach(([key, val]) => {
+                                        this._mensagem.texto = val;
+                                    })
+                                    */
+                                    // Rendering customized messages
+                                    const msg = "must be between 1 and 100";
+                                    if (err.property === "quantidade")
+                                        this._mensagem.texto = `Quantidade ${msg}`;
+                                    else if (err.property === "valor")
+                                        this._mensagem.texto = `Valor ${msg}`;
+                                    else 
+                                        this.mensagem.texto = "Unexpected error";
                                 })
                             }
                             else {
-                                console.log(data.message);
+                                this._mensagem.texto = data.message;
                             }
                         })
                 }
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                this._mensagem.texto = "Unexpected Error";
+                console.error(err);
+            })
     }
     
     apaga() {    

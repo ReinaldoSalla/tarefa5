@@ -3,7 +3,7 @@
 System.register(['../models/ListaNegociacoes', '../models/Mensagem', '../views/NegociacoesView', '../views/MensagemView', '../services/NegociacaoService', '../helpers/DateHelper', '../helpers/Bind', '../models/Negociacao', '../services/post-service'], function (_export, _context) {
     "use strict";
 
-    var ListaNegociacoes, Mensagem, NegociacoesView, MensagemView, NegociacaoService, DateHelper, Bind, Negociacao, PostService, _typeof, _createClass, NegociacaoController, negociacaoController;
+    var ListaNegociacoes, Mensagem, NegociacoesView, MensagemView, NegociacaoService, DateHelper, Bind, Negociacao, PostService, _createClass, NegociacaoController, negociacaoController;
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -38,12 +38,6 @@ System.register(['../models/ListaNegociacoes', '../models/Mensagem', '../views/N
             PostService = _servicesPostService.PostService;
         }],
         execute: function () {
-            _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-                return typeof obj;
-            } : function (obj) {
-                return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-            };
-
             _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
@@ -132,29 +126,31 @@ System.register(['../models/ListaNegociacoes', '../models/Mensagem', '../views/N
                         var postService = new PostService(this._inputData, this._inputQuantidade, this._inputValor);
                         postService.sendData().then(function (res) {
                             if (res.status === 201) {
-                                _this4._mensagem.texto = "Negociação cadastrada com sucesso";
+                                _this4._mensagem.texto = "Negotiation registered with success";
                                 _this4._limpaFormulario();
                                 _this4._listaNegociacoes.adiciona(negociacao);
                             } else {
                                 res.json().then(function (data) {
-                                    _this4._mensagem.texto = "Não foi possível cadastrar a negociação";
-                                    console.log(_typeof(data.message));
                                     if (typeof data.message !== "string") {
                                         data.message.forEach(function (err) {
-                                            console.log(err.property);
-                                            if (err.property === "quantidade") {
-                                                console.log("error in quantidade");
-                                            } else if (err.property === "valor") {
-                                                console.log("error in valor");
-                                            }
+                                            // Rendering the raw messages from the backend
+                                            /*
+                                            Object.entries(err.constraints).forEach(([key, val]) => {
+                                                this._mensagem.texto = val;
+                                            })
+                                            */
+                                            // Rendering customized messages
+                                            var msg = "must be between 1 and 100";
+                                            if (err.property === "quantidade") _this4._mensagem.texto = 'Quantidade ' + msg;else if (err.property === "valor") _this4._mensagem.texto = 'Valor ' + msg;else _this4.mensagem.texto = "Unexpected error";
                                         });
                                     } else {
-                                        console.log(data.message);
+                                        _this4._mensagem.texto = data.message;
                                     }
                                 });
                             }
                         }).catch(function (err) {
-                            return console.log(err);
+                            _this4._mensagem.texto = "Unexpected Error";
+                            console.error(err);
                         });
                     }
                 }, {
