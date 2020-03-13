@@ -4,5 +4,3 @@ node_modules/
 package-lock.json
 #*.logs
 #*.maps
-
-src/negotiations/negotiations.logs
