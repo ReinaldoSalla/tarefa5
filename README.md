@@ -36,19 +36,11 @@ POST, PATCH: date, amount, value
 
 GET(id), PATCH(id), DELETE(id): id
 
-## Todo: 
-
-create logs for errors
-
-do something when some client sends anendpoint that does't exist
-
-16/2/1995 frontend
-
-## Todo2:
-
-security
+## Todo:
 
 docker
+
+security
 
 swagger
 

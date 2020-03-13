@@ -23,6 +23,7 @@ import { NegotiationDto } from "./negotiation.dto";
 import Calendar from "../utils/calendar";
 import { Validator } from "class-validator";
 import HttpExceptionFilter from "../http-exception.filter"
+import { negotiationLogger } from "../logger";
 
 @Controller(negotiationsRoute)
 export class NegotiationsController {
@@ -53,8 +54,11 @@ export class NegotiationsController {
   async getOneSavedNegotiation(@Param("id") id: string): Promise<Negotiation> {
     if(this.validator.isMongoId(id)) 
       return await this.negotiationsService.getOneSavedNegotiation(id)
-    else
+    else {
+      const msg: string = `GET method with invalid id: ${id}`
+      negotiationLogger.error(msg); console.log(`GET method with invalid id: ${id}`)
       throw new BadRequestException(`Id '${id}' is invalid`);
+    }
   }
 
   @Get()
@@ -88,7 +92,11 @@ export class NegotiationsController {
       const convertedDate: Date = Calendar.convertFromBrToUs(date);
       await this.negotiationsService.patchNegotiation(id, convertedDate, amount, value);
       return null;
-    } else throw new BadRequestException(`Id '${id}' is invalid`);
+    } else {
+      const msg: string = `PATCH method with invalid id: ${id}`;
+      negotiationLogger.error(msg); console.log(msg);
+      throw new BadRequestException(`Id '${id}' is invalid`);
+    }
   }
 
   @Delete(":id")
@@ -96,7 +104,11 @@ export class NegotiationsController {
     if(this.validator.isMongoId(id)) {
       await this.negotiationsService.deleteOneNegotiation(id);
       return null;
-    } else throw new BadRequestException(`Id '${id}' is invalid`);
+    } else {
+      const msg: string = `DELETE method with invalid id: ${id}`;
+      negotiationLogger.error(msg); console.log(msg);
+      throw new BadRequestException(`Id '${id}' is invalid`);
+    }
   }
 
   @Delete()

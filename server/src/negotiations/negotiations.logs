@@ -535,3 +535,45 @@
 {"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:34:6 - 13/3/2020"}
 {"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:34:6 - 13/3/2020"}
 {"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:34:6 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:45:23 - 13/3/2020"}
+{"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:45:23 - 13/3/2020"}
+{"message":"DELETE method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:45:23 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:49:1 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:49:1 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:53:43 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:53:43 - 13/3/2020"}
+{"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:53:43 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:53:43 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations/5e6b82bba169d92eb8eae5a8","level":"info","service":"test-service","datetime":"9:53:43 - 13/3/2020"}
+{"message":"GET request with invalid id: 5e6b82bba169d92eb8eae5a8xxx","level":"error","service":"test-service","datetime":"9:53:43 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:59:48 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:59:48 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"9:59:48 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations/5e6b82bba169d92eb8eae5a8","level":"info","service":"test-service","datetime":"10:9:9 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations/5e6b82bba169d92eb8eae5a8","level":"info","service":"test-service","datetime":"10:9:9 - 13/3/2020"}
+{"message":"GET method with invalid id: 5e6b82bba169d92eb8eae5a8xxx","level":"error","service":"test-service","datetime":"10:9:9 - 13/3/2020"}
+{"message":"GET method for nonexistent id: 5e6b82bba169d92eb8eae5a1","level":"error","service":"test-service","datetime":"10:9:9 - 13/3/2020"}
+{"message":"PATCH method for nonexistent id: 5e6b82bba169d92eb8eae5a1","level":"error","service":"test-service","datetime":"10:9:9 - 13/3/2020"}
+{"message":"DELETE method for nonexistent id: 5e6b82bba169d92eb8eae5a1","level":"error","service":"test-service","datetime":"10:9:9 - 13/3/2020"}
+{"message":"PATCH method for route localhost/3000/api/negotiations/5e6b82bba169d92eb8eae5a8","level":"info","service":"test-service","datetime":"10:9:9 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:9:9 - 13/3/2020"}
+{"message":"DELETE method for route localhost/3000/api/negotiations/5e6b82bba169d92eb8eae5a8","level":"info","service":"test-service","datetime":"10:9:9 - 13/3/2020"}
+{"message":"DELETE method for nonexistent id: 5e6b82bba169d92eb8eae5a8","level":"error","service":"test-service","datetime":"10:9:9 - 13/3/2020"}
+{"message":"PATCH method for nonexistent id: 5e6b82bba169d92eb8eae5a8","level":"error","service":"test-service","datetime":"10:9:9 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:9:9 - 13/3/2020"}
+{"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:13:4 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:13:4 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:13:4 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations/5e6b86f171e47b3004eab571","level":"info","service":"test-service","datetime":"10:13:4 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations/5e6b86f171e47b3004eab571","level":"info","service":"test-service","datetime":"10:13:4 - 13/3/2020"}
+{"message":"GET method with invalid id: 5e6b86f171e47b3004eab571xxx","level":"error","service":"test-service","datetime":"10:13:4 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:31:45 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:31:45 - 13/3/2020"}
+{"message":"DELETE method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:31:45 - 13/3/2020"}
+{"message":"GET method with invalid id: 5e6b86f171e47b3004eab571xxx","level":"error","service":"test-service","datetime":"10:31:45 - 13/3/2020"}
+{"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:35:33 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:35:33 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:35:33 - 13/3/2020"}
+{"message":"GET method with invalid id: 5e6b86f171e47b3004eab571xxx","level":"error","service":"test-service","datetime":"10:35:33 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"10:35:33 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations/5e6b8c325d7a0d1d98b2c686","level":"info","service":"test-service","datetime":"10:35:33 - 13/3/2020"}

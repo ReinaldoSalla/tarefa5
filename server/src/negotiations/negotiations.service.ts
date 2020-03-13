@@ -50,7 +50,11 @@ export class NegotiationsService {
       negotiationLogger.info(msg); console.log(msg);
       return negotiation
     }
-    else throw new NotFoundException(`Negotiation with id '${id}' does not exist in the database`);
+    else {
+      const msg: string = `GET method for nonexistent id: ${id}`;
+      negotiationLogger.error(msg); console.log(msg);
+      throw new NotFoundException(`Negotiation with id '${id}' does not exist in the database`);
+    }
   }
 
   public async getAllSavedNegotiations(): Promise<Negotiation[]> {
@@ -75,7 +79,11 @@ export class NegotiationsService {
       const msg: string = `PATCH method for route ${routeApi}/${negotiationsRoute}/${id}`;
       console.log(msg); negotiationLogger.info(msg); 
       negotiation.save();
-    } else throw new NotFoundException(`Negotiation with id '${id}' does not exist in the database`);
+    } else {
+      const msg: string = `PATCH method for nonexistent id: ${id}`;
+      negotiationLogger.error(msg); console.log(msg);
+      throw new NotFoundException(`Negotiation with id '${id}' does not exist in the database`);
+    }
   }
 
   public async deleteOneNegotiation(id): Promise<void> {
@@ -83,7 +91,11 @@ export class NegotiationsService {
     if(negotiation.n !== 0) {
       const msg: string = `DELETE method for route ${routeApi}/${negotiationsRoute}/${id}`;
       console.log(msg); negotiationLogger.info(msg); 
-    } else throw new NotFoundException(`Negotiation with id '${id}' does not exist in the database`);
+    } else {
+      const msg: string = `DELETE method for nonexistent id: ${id}`;
+      negotiationLogger.error(msg); console.log(msg);
+      throw new NotFoundException(`Negotiation with id '${id}' does not exist in the database`);
+    }
   }
 
   public async deleteAllNegotiations(): Promise<void> {
