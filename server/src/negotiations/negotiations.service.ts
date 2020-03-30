@@ -12,22 +12,32 @@ import {
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Negotiation } from "./negotiation.interface";
-import Calendar from "../utils/calendar";
 import { negotiationLogger } from "../logger";
 import { NegotiationDto } from "./negotiation.dto";
+import DatabaseFiller from "./negotiation-utils/populate-database";
 
 @Injectable()
 export class NegotiationsService {
+  private dbFiller;
+
   constructor(
     @InjectModel("ThisWeek") public readonly currentNegotiationModel: Model<Negotiation>,
     @InjectModel("LastWeek") public readonly lastNegotiationModel: Model<Negotiation>,
     @InjectModel("BeforeLastWeek") public readonly BeforeLastNegotiationModel: Model<Negotiation>,
     @InjectModel("Saved") public readonly savedNegotiationModel: Model<Negotiation>
-  ) {}
+  ) {
+    this.dbFiller = new DatabaseFiller();
+  }
 
   public async getCurrentNegotiations(): Promise<Negotiation[]> {
+    var createDocument;
+    const documents = await this.currentNegotiationModel.countDocuments({}, (err: Error, numDocuments: number) => {
+      if (!err && !numDocuments) createDocument = true
+    });
+    if (createDocument) this.dbFiller.createThisWeeksCollection("thisWeek", currentNegotiationModel)
     const msg: string = `GET method for route ${routeApi}/${negotiationsRoute}/${thisWeekRoute}`;
     console.log(msg); negotiationLogger.info(msg); 
+
     return await this.currentNegotiationModel.find();
   }
 

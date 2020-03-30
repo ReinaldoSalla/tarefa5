@@ -1,7 +1,6 @@
 /*
-This script creates 3 collections (thisWeek, lastWeek, beforeLastWeek) into the database "tarefa5".
-Each collection has 3 documents that are going to be sent to the client by negotiations.service.ts
-Command for running this file: npx ts-node populatedb.ts
+This script manually creates 3 collections (thisWeek, lastWeek, beforeLastWeek) into the database "tarefa5".
+Command for running this file: npx ts-node populate-database-manually.ts
 */
 
 
