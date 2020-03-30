@@ -7,6 +7,7 @@ export const dbName: string = "tarefa5";
 export const dbUrl: string = `mongodb://${hostname}/${dbName}`;
 
 export const clientDir: string = join(__dirname, "..", "..", "client");
+//export const dbUrl: string = "mongodb+srv://db_user:eohr2nwYYwW5FV7W@cluster0-427nn.gcp.mongodb.net/test?retryWrites=true&w=majority"; //mongo atlas
 
 export const route: string = `${hostname}/${port}`;
 export const routeApi: string = `${route}/api`;

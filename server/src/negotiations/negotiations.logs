@@ -585,3 +585,7 @@
 {"message":"GET method for route localhost/3000/api/negotiations/thisWeek","level":"info","service":"test-service","datetime":"10:44:37 - 13/3/2020"}
 {"message":"GET method for route localhost/3000/api/negotiations/lastWeek","level":"info","service":"test-service","datetime":"10:44:37 - 13/3/2020"}
 {"message":"GET method for route localhost/3000/api/negotiations/beforeLastWeek","level":"info","service":"test-service","datetime":"10:44:37 - 13/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:5:29 - 30/3/2020"}
+{"message":"POST method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:5:29 - 30/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:5:29 - 30/3/2020"}
+{"message":"GET method for route localhost/3000/api/negotiations","level":"info","service":"test-service","datetime":"11:5:29 - 30/3/2020"}
