@@ -27,25 +27,11 @@ export class NegotiationsService {
     @InjectModel("Saved") public readonly savedNegotiationModel: Model<Negotiation>
   ) {}
 
+  // Works, but verbose
   /*
-  private async processPastNegotiations(negotiationModel: Model<Negotiation>, methodToPopulate: any, msg: string): Promise<Array<Negotiation>> {
-    let createDocument;
-    const documents = await negotiationModel.countDocuments({}, (err: Error, numDocuments: number) => {
-      if (!err && !numDocuments) createDocument = true;
-    });
-    if (createDocument) await methodToPopulate(negotiationModel, "thisWeek");
-    return await negotiationModel.find();
-  }
-
-  public async getCurrentNegotiations(): Promise<Array<Negotiation>> {
-    const msg: string = `GET method for route ${routeApi}/${negotiationsRoute}/${thisWeekRoute}`;
-    return await this.processPastNegotiations(this.currentNegotiationModel, this.dbFiller.createThisWeeksCollection, msg)
-  }
-  */
-
   public async getCurrentNegotiations(): Promise<Negotiation[]> {
     let createDocument;
-    const documents = await this.currentNegotiationModel.countDocuments({}, (err: Error, numDocuments: number) => {
+    await this.currentNegotiationModel.countDocuments({}, (err: Error, numDocuments: number) => {
       if (!err && !numDocuments) createDocument = true
     });
     if (createDocument) await this.dbFiller.createThisWeeksCollection(this.currentNegotiationModel, "thisWeek");
@@ -53,6 +39,26 @@ export class NegotiationsService {
     console.log(msg); negotiationLogger.info(msg); 
     return await this.currentNegotiationModel.find();
   }
+  */
+
+  // Try to abstract the test to see if the document exists
+  private async testCreateDocument(negotiationModel: Model<Negotiation>): Promise<boolean> {
+    let flagCreateDocument = false;
+    await negotiationModel.countDocuments({}, (err: Error, numDocuments: number) => {
+      if (!err && !numDocuments) flagCreateDocument = true
+    });
+    return flagCreateDocument;
+  }
+
+  
+  public async getCurrentNegotiations(): Promise<Array<Negotiation>> {
+    const flag: boolean = await this.testCreateDocument(this.currentNegotiationModel);
+    if (flag) await this.dbFiller.createThisWeeksCollection(this.currentNegotiationModel, "thisWeek");
+    const msg: string = `GET method for route ${routeApi}/${negotiationsRoute}/${thisWeekRoute}`;
+    console.log(msg); negotiationLogger.info(msg); 
+    return await this.currentNegotiationModel.find();
+  }
+
 
   public async getLastNegotiations(): Promise<Negotiation[]> {
     const msg: string = `GET method for route ${routeApi}/${negotiationsRoute}/${lastWeekRoute}`;
