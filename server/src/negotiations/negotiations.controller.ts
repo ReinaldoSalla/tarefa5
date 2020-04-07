@@ -20,7 +20,7 @@ import  { ValidationPipe } from "@nestjs/common";
 import { Negotiation } from "./negotiation.interface";
 import { NegotiationsService } from "./negotiations.service";
 import { NegotiationDto } from "./negotiation.dto";
-import Calendar from "../utils/calendar";
+import Calendar from "../general-utils/calendar";
 import { Validator } from "class-validator";
 import HttpExceptionFilter from "../http-exception.filter"
 import { negotiationLogger } from "../logger";
@@ -28,9 +28,7 @@ import { negotiationLogger } from "../logger";
 @Controller(negotiationsRoute)
 export class NegotiationsController {
   private validator;
-  constructor(private readonly negotiationsService: NegotiationsService) {
-    this.validator = new Validator();
-  }
+  constructor(private readonly negotiationsService: NegotiationsService) {}
 
   @Get(thisWeekRoute)
   @UseFilters(new HttpExceptionFilter())

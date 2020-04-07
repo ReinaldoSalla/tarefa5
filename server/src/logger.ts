@@ -1,7 +1,7 @@
 import * as winston from 'winston';
 import * as fs from "fs";
 import { join } from "path";
-import Calendar from "./utils/calendar";
+import Calendar from "./general-utils/calendar";
 import { negotiationsLogsDir } from "./properties";
 
 export const negotiationLogger = winston.createLogger({

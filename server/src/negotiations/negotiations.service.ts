@@ -30,11 +30,11 @@ export class NegotiationsService {
   }
 
   public async getCurrentNegotiations(): Promise<Negotiation[]> {
-    var createDocument;
+    let createDocument;
     const documents = await this.currentNegotiationModel.countDocuments({}, (err: Error, numDocuments: number) => {
       if (!err && !numDocuments) createDocument = true
     });
-    if (createDocument) this.dbFiller.createThisWeeksCollection("thisWeek", currentNegotiationModel)
+    if (createDocument) this.dbFiller.createThisWeeksCollection(this.currentNegotiationModel, "thisWeek")
     const msg: string = `GET method for route ${routeApi}/${negotiationsRoute}/${thisWeekRoute}`;
     console.log(msg); negotiationLogger.info(msg); 
 

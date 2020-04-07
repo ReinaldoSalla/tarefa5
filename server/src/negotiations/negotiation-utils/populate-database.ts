@@ -1,23 +1,27 @@
 import * as mongoose from "mongoose";
 import { negotiationSchema } from "../negotiation.schema";
 import Calendar, { Dates }  from "../../general-utils/calendar";
-import { Negotiation } from "../negotiation.interface";
 import { Model } from "mongoose";
+import { Negotiation } from "../negotiation.interface";
+
+interface NegotiationItems {
+    data: Date,
+    quantidade: number,
+    valor: number
+}
 
 export default class DatabaseFiller {
-    private dates: Dates;
+    private dates: Dates = Calendar.getDates();
 
-    constructor() {
-        this.dates = Calendar.getDates();
-    }
-
-    private async saveCollection(negotiations: Negotiations[], NegotiationModel: mongoose.Model<mongoose.Document>) {
-        for(let i = 0; i < negotiations.length; i++) {
+    private async saveCollection(negotiations: any, NegotiationModel: mongoose.Model<mongoose.Document>) {
+        for (let i = 0; i < negotiations.length; i++) {
             const negotiation = new NegotiationModel({
                 data: negotiations[i].data,
                 quantidade: negotiations[i].quantidade,
                 valor: negotiations[i].valor
             });
+            console.log("******************");
+            console.log(i);
             await negotiation.save();
         }
     }
@@ -29,7 +33,7 @@ export default class DatabaseFiller {
             { data: this.dates["currentDate"], quantidade: 3, valor: 350 },
         ]
         const NegotiationModel = mongoose.model(collectionName, negotiationSchema)
-        this.saveCollection(negotiations, NegotiationModel);
+        await this.saveCollection(negotiations, NegotiationModel);
         console.log(`Created collection ${collectionName}`)
     }
 

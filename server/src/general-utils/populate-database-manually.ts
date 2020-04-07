@@ -6,7 +6,7 @@ Command for running this file: npx ts-node populate-database-manually.ts
 
 import * as mongoose from "mongoose";
 import { negotiationSchema } from "../negotiations/negotiation.schema";
-import Calendar, { Dates }  from "../utils/calendar";
+import Calendar, { Dates }  from "../general-utils/calendar";
 import { dbUrl } from "../properties";
 
 interface Negotiations {
