@@ -20,21 +20,18 @@ export default class DatabaseFiller {
                 quantidade: negotiations[i].quantidade,
                 valor: negotiations[i].valor
             });
-            console.log("******************");
-            console.log(i);
             await negotiation.save();
         }
     }
 
     public async createThisWeeksCollection(negotiationModel: Model<Negotiation>, collectionName: string): Promise<void> {
-        const negotiations = [
+        const negotiations: Array<NegotiationItems> = [
             { data: this.dates["currentDate"], quantidade: 1, valor: 150 },
             { data: this.dates["currentDate"], quantidade: 2, valor: 250 },
             { data: this.dates["currentDate"], quantidade: 3, valor: 350 },
         ]
-        const NegotiationModel = mongoose.model(collectionName, negotiationSchema)
-        await this.saveCollection(negotiations, NegotiationModel);
-        console.log(`Created collection ${collectionName}`)
+        await this.saveCollection(negotiations, negotiationModel);
+        console.log(`Created collection ${collectionName}`);
     }
 
     public async createLastWeeksCollection(negotiationModel: Model<Negotiation>, collectionName: string): Promise<void> {
@@ -43,8 +40,7 @@ export default class DatabaseFiller {
             { data: this.dates["dateMinus7Days"], quantidade: 2, valor: 550 },
             { data: this.dates["dateMinus7Days"], quantidade: 3, valor: 650 },
         ]
-        const NegotiationModel = mongoose.model(collectionName, negotiationSchema)
-        this.saveCollection(negotiations, NegotiationModel);
+        await this.saveCollection(negotiations, negotiationModel);
         console.log(`Created collection ${collectionName}`)
     }
 
@@ -54,8 +50,7 @@ export default class DatabaseFiller {
             { data: this.dates["dateMinus14Days"], quantidade: 2, valor: 850 },
             { data: this.dates["dateMinus14Days"], quantidade: 3, valor: 950 },
         ]
-        const NegotiationModel = mongoose.model(collectionName, negotiationSchema)
-        this.saveCollection(negotiations, NegotiationModel);
+        await this.saveCollection(negotiations, negotiationModel);
         console.log(`Created collection ${collectionName}`)
     }
 }

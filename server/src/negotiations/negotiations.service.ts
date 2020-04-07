@@ -18,26 +18,39 @@ import DatabaseFiller from "./negotiation-utils/populate-database";
 
 @Injectable()
 export class NegotiationsService {
-  private dbFiller;
+  private dbFiller = new DatabaseFiller();
 
   constructor(
     @InjectModel("ThisWeek") public readonly currentNegotiationModel: Model<Negotiation>,
     @InjectModel("LastWeek") public readonly lastNegotiationModel: Model<Negotiation>,
     @InjectModel("BeforeLastWeek") public readonly BeforeLastNegotiationModel: Model<Negotiation>,
     @InjectModel("Saved") public readonly savedNegotiationModel: Model<Negotiation>
-  ) {
-    this.dbFiller = new DatabaseFiller();
+  ) {}
+
+  /*
+  private async processPastNegotiations(negotiationModel: Model<Negotiation>, methodToPopulate: any, msg: string): Promise<Array<Negotiation>> {
+    let createDocument;
+    const documents = await negotiationModel.countDocuments({}, (err: Error, numDocuments: number) => {
+      if (!err && !numDocuments) createDocument = true;
+    });
+    if (createDocument) await methodToPopulate(negotiationModel, "thisWeek");
+    return await negotiationModel.find();
   }
+
+  public async getCurrentNegotiations(): Promise<Array<Negotiation>> {
+    const msg: string = `GET method for route ${routeApi}/${negotiationsRoute}/${thisWeekRoute}`;
+    return await this.processPastNegotiations(this.currentNegotiationModel, this.dbFiller.createThisWeeksCollection, msg)
+  }
+  */
 
   public async getCurrentNegotiations(): Promise<Negotiation[]> {
     let createDocument;
     const documents = await this.currentNegotiationModel.countDocuments({}, (err: Error, numDocuments: number) => {
       if (!err && !numDocuments) createDocument = true
     });
-    if (createDocument) this.dbFiller.createThisWeeksCollection(this.currentNegotiationModel, "thisWeek")
+    if (createDocument) await this.dbFiller.createThisWeeksCollection(this.currentNegotiationModel, "thisWeek");
     const msg: string = `GET method for route ${routeApi}/${negotiationsRoute}/${thisWeekRoute}`;
     console.log(msg); negotiationLogger.info(msg); 
-
     return await this.currentNegotiationModel.find();
   }
 
