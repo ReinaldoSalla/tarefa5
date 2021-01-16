@@ -1,3 +1,5 @@
+//.env
+
 import { join } from "path";
 
 export const port: number = 3000;

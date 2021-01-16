@@ -12,35 +12,51 @@ import {
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Negotiation } from "./negotiation.interface";
-import Calendar from "../utils/calendar";
 import { negotiationLogger } from "../logger";
 import { NegotiationDto } from "./negotiation.dto";
+import DatabaseFiller from "./negotiation-utils/populate-database";
 
 @Injectable()
 export class NegotiationsService {
+  private dbFiller = new DatabaseFiller();
+
   constructor(
     @InjectModel("ThisWeek") public readonly currentNegotiationModel: Model<Negotiation>,
     @InjectModel("LastWeek") public readonly lastNegotiationModel: Model<Negotiation>,
-    @InjectModel("BeforeLastWeek") public readonly BeforeLastNegotiationModel: Model<Negotiation>,
+    @InjectModel("BeforeLastWeek") public readonly beforeLastNegotiationModel: Model<Negotiation>,
     @InjectModel("Saved") public readonly savedNegotiationModel: Model<Negotiation>
   ) {}
 
-  public async getCurrentNegotiations(): Promise<Negotiation[]> {
+  private async testCreateCollection(negotiationModel: Model<Negotiation>): Promise<boolean> {
+    let flagCreateDocument = false;
+    await negotiationModel.countDocuments({}, (err: Error, numDocuments: number) => {
+      if (!err && !numDocuments) flagCreateDocument = true
+    });
+    return flagCreateDocument;
+  }
+  
+  public async getCurrentNegotiations(): Promise<Array<Negotiation>> {
+    const flag: boolean = await this.testCreateCollection(this.currentNegotiationModel);
+    if (flag) await this.dbFiller.createThisWeeksCollection(this.currentNegotiationModel, "thisWeek");
     const msg: string = `GET method for route ${routeApi}/${negotiationsRoute}/${thisWeekRoute}`;
     console.log(msg); negotiationLogger.info(msg); 
     return await this.currentNegotiationModel.find();
   }
 
-  public async getLastNegotiations(): Promise<Negotiation[]> {
+  public async getLastNegotiations(): Promise<Array<Negotiation>> {
+    const flag: boolean = await this.testCreateCollection(this.lastNegotiationModel);
+    if (flag) await this.dbFiller.createLastWeeksCollection(this.lastNegotiationModel, "lastWeek");
     const msg: string = `GET method for route ${routeApi}/${negotiationsRoute}/${lastWeekRoute}`;
     console.log(msg); negotiationLogger.info(msg); 
     return await this.lastNegotiationModel.find();
   }
 
-  public async getBeforeLastNegotiations(): Promise<Negotiation[]> {
+  public async getBeforeLastNegotiations(): Promise<Array<Negotiation>> {
+    const flag: boolean = await this.testCreateCollection(this.beforeLastNegotiationModel);
+    if (flag) await this.dbFiller.createLastWeeksCollection(this.beforeLastNegotiationModel, "beforeLastWeek");
     const msg: string = `GET method for route ${routeApi}/${negotiationsRoute}/${beforeLastWeekRoute}`;
     console.log(msg); negotiationLogger.info(msg); 
-    return await this.BeforeLastNegotiationModel.find();
+    return await this.beforeLastNegotiationModel.find();
   }
 
   public async getOneSavedNegotiation(id: string): Promise<Negotiation> {
